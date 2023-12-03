@@ -7,7 +7,7 @@ final readonly class PartOne
 {
     public function run(array $input): int
     {
-        return array_sum(array_map(function($line) {
+        return array_sum(array_map(function(string $line) {
             $line = preg_replace('/[a-z]/i', '', $line);
 
             if (1 === mb_strlen($line)) {

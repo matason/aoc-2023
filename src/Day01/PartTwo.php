@@ -7,7 +7,7 @@ final readonly class PartTwo
 {
     public function run(array $input): int
     {
-        return array_sum(array_map(function($line) {
+        return array_sum(array_map(function(string $line) {
             return (new Line($line))->process();
         }, $input));
     }
