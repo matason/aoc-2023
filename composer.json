@@ -1,0 +1,25 @@
+{
+    "name": "matason/aoc2023",
+    "description": "Over-engineering since 2000.",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Matason\\AoC2023\\": "src/"
+        },
+        "files": ["src/Common/File.php"]
+    },
+    "authors": [
+        {
+            "name": "matason",
+            "email": "chrispmaiden@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ext-mbstring": "*"
+    }
+}
