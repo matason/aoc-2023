@@ -37,18 +37,4 @@ EOD;
 
         return [[array_filter(explode("\n", $input))]];
     }
-
-    public static function part2InputProvider(): array
-    {
-        $input = <<<EOD
-two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen
-EOD;
-        return [[array_filter(explode("\n", $input))]];
-    }
 }
