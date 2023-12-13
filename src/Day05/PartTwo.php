@@ -9,10 +9,62 @@ final readonly class PartTwo
 {
     public function run(array $input): int
     {
-        $ranges = new ArrayIterator($this->buildranges($input[0]));
+        $ranges = $this->buildranges($input[0]);
         $maps = $this->buildMaps(array_slice($input, 1));
+        $results = [];
 
-        return 46;
+        foreach ($ranges as $range) {
+            $range = new ArrayIterator([$range]);
+            foreach ($maps as $name => $transitionMappings) {
+                $mapped = new ArrayIterator([]);
+                foreach ($transitionMappings as $map) {
+                    $unmapped = new ArrayIterator([]);
+                    while ($range->valid()) {
+                        $processedRange = $map->processRange($range->current());
+
+                        if (array_key_exists(Map::INTERSECTION, $processedRange)) {
+                            $mapped->append($processedRange[Map::INTERSECTION]);
+                        }
+
+                        if (array_key_exists(Map::MISS, $processedRange)) {
+                            $unmapped->append($processedRange[Map::MISS]);
+                        }
+                        if (array_key_exists(Map::DIFFERENCE, $processedRange)) {
+
+                            foreach ($processedRange[Map::DIFFERENCE] as $difference) {
+                                $unmapped->append($difference);
+                            }
+                        }
+
+                        $range->next();
+                    }
+
+                    $range = $unmapped;
+                }
+
+                $range = $mapped;
+
+                foreach ($unmapped->getArrayCopy() as $unmappedRange) {
+                    $range->append($unmappedRange);
+                }
+            }
+
+            foreach ($unmapped->getArrayCopy() as $unmappedRange) {
+                $mapped->append($unmappedRange);
+            }
+
+            $results = array_merge($results, $mapped->getArrayCopy());
+        }
+
+        $result = array_reduce($results, function(Range $a, Range $b): Range {
+            if ($a->from < $b->from) {
+                return $a;
+            }
+            return $b;
+        }, $results[0]);
+
+
+        return $result->from;
     }
 
     private function buildMaps(array $input): array
