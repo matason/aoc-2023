@@ -14,6 +14,7 @@ final readonly class PartOne
             $index = $map[0] . $map[1] . $map[2];
             $l = $map[7] . $map[8] . $map[9];
             $r = $map[12] . $map[13] . $map[14];
+
             $maps[$index] = ['L' => $l, 'R' => $r];
         }
 

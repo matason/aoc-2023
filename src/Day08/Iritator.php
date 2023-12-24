@@ -9,7 +9,7 @@ final class Iritator implements \Iterator
 
     private int $count = 0;
 
-    public function __construct(private readonly array $data) {
+    public function __construct(private array $data) {
         $this->count = count($data);
     }
 
@@ -40,5 +40,10 @@ final class Iritator implements \Iterator
     #[\Override] public function rewind(): void
     {
         $this->position = 0;
+    }
+
+    public function &toArray(): array
+    {
+        return $this->data;
     }
 }
