@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Matason\AoC2023\Day03;
 
+use Matason\AoC2023\Common\Point;
+
 final readonly class PartOne
 {
     public function run(array $input): int
